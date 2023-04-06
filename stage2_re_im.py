@@ -1,7 +1,5 @@
 '''
-
 Author: Olga TARAN, University of Geneva, 2023
-
 '''
 
 import argparse
@@ -16,9 +14,7 @@ from pathlib import Path
 import warnings
 warnings.simplefilter("ignore")
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "6"
 # ======================================================================================================================
-
 parser = argparse.ArgumentParser(description='...')
 parser.add_argument("--config_path", default="./configs/config.yaml", type=str, help="The config file path")
 parser.add_argument("--type", default="test", type=str, choices=["train", "test"])
