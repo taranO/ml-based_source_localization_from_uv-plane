@@ -1,7 +1,5 @@
 '''
-
 Author: Olga TARAN, University of Geneva, 2023
-
 '''
 
 import argparse
@@ -30,7 +28,7 @@ parser.add_argument('--start_epoch', default=1, type=int)
 # validation & test parameters
 parser.add_argument('--test_epoch', default=1000, type=int)
 
-parser.add_argument('--is_debug', default=True, type=int)
+parser.add_argument('--is_debug', default=False, type=int)
 
 # ======================================================================================================================
 class SampledInverseRun(BaseRun):
