@@ -15,9 +15,7 @@ from src.trainer.sampled_inverse_re_im import SampledInverseReIm
 import warnings
 warnings.simplefilter("ignore")
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 # ======================================================================================================================
-
 parser = argparse.ArgumentParser(description='...')
 parser.add_argument("--config_path", default="./configs/config.yaml", type=str, help="The config file path")
 
