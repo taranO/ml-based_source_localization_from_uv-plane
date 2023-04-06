@@ -1,7 +1,5 @@
 '''
-
 Author: Olga TARAN, University of Geneva, 2023
-
 '''
 
 import argparse
@@ -15,7 +13,6 @@ from src.trainer.sampled_inverse_mag_phas import SampledInverseMagPhas
 import warnings
 warnings.simplefilter("ignore")
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 # ======================================================================================================================
 
 parser = argparse.ArgumentParser(description='...')
@@ -56,8 +53,6 @@ class SampledInverseRun(BaseRun):
 
         save_dir = makeDir(os.path.join(self.args.home, self.config.dataset["path"], "github_test_subset"))
         np.save(os.path.join(save_dir, "%s.npy" % self.args.pref), np.asarray(Predicted))
-
-
 
 # ======================================================================================================================
 if __name__ == "__main__":
