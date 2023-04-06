@@ -1,0 +1,76 @@
+checkpoints_dir: ./checkpoints/noisy
+results_dir: ./results/noisy 
+
+summary_writer: ./tensor_board/noisy 
+is_write_summary: False
+
+stochastic: False
+stoch_mean: 0
+stoch_std: 0.01
+
+blur_std: 0 # set to zero if not applicable
+
+optimization:
+  optimizer: adam
+  lr: 0.001
+  lr_scheduler: False
+  scheduler_type: cosine #  one of [cosine, custom, exp]
+
+models:
+  # real & imaginary stage 1
+  inverse:
+    input_size: (2, 1, 1400)
+    output_size: (512, 512)
+    is_conv1d: False
+    dens_filters: [262144] 
+    loss: mse # mse, l1, ssim, binary_crossentropy, jaccard_distance, dice_coefficient, dice_bce
+
+  # magnitude & phase stage 1    
+  inverse_mag_phas:
+    input_size: (2, 1, 1400)
+    output_size: (512, 512, 1)
+    is_conv1d: False
+    dens_filters: [262144] # 512x512 = 262144
+    conv_filters: [] 
+    loss: mse # mse, l1, ssim, binary_crossentropy, jaccard_distance, dice_coefficient, dice_bce
+    
+  # stage 2
+  ae:
+    input_size: (512, 512)
+    out_channels: 1
+    filters: [8, 16] 
+    loss: mse # sparse_categorical_crossentropy
+   
+
+dataset:
+  batch_size: 32
+
+  path: ''
+
+  output: sky_true_norm.npy
+  #input: sky_noisy_gridded_re_im_max_positions_k1400.npy  
+  input: sky_noisy_gridded_mag_phas_max_positions_k1400.npy 
+  keys: sky_keys.npy
+
+  
+  output_dtype: float # float or   uint8
+  s: 1400 # number of sub-sampled values
+  t: 1 # sampling time
+
+  # input normalization:    
+  ## [0, 0] -> nothing to do
+  ## [1000, 1000] -> real & imag 
+  ## [100, 0] -> mag & phase
+  z: [100, 0]
+  
+  # clipping:  
+  # [[], []] -> nothing to do
+  # [[-10, 10], [-10, 10]]  -> real & imag 
+  # [[0, 1], [ ]] -> mag & phase  
+  clip: [[0, 1], [ ]]
+
+  data_size: (512, 512) 
+
+  train_ratio: 0.8 # 80%
+  validation_ratio: 0.1 # 10%
+  test_ratio: 0.1 # 10%
