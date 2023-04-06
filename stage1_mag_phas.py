@@ -14,7 +14,6 @@ import warnings
 warnings.simplefilter("ignore")
 
 # ======================================================================================================================
-
 parser = argparse.ArgumentParser(description='...')
 parser.add_argument("--config_path", default="./configs/config.yaml", type=str, help="The config file path")
 parser.add_argument("--type", default="train", type=str, choices=["train", "test"])
@@ -30,7 +29,7 @@ parser.add_argument('--start_epoch', default=1, type=int)
 # validation & test parameters
 parser.add_argument('--test_epoch', default=1000, type=int)
 
-parser.add_argument('--is_debug', default=True, type=int)
+parser.add_argument('--is_debug', default=False, type=int)
 
 # ======================================================================================================================
 class SampledInverseRun(BaseRun):
